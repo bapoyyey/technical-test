@@ -117,7 +117,8 @@
   </table>
 </div>
 
-<div v-if="showmodal">
+<transition name="modal-fade">
+<div v-if="showmodal" class="h-full">
   <div class="bg-slate-800 bg-opacity-10 flex justify-center items-center absolute top-0 right-0 bottom-0 left-0">
     <div class="bg-white w-2/4 h-2/4 p-4 rounded-md text-center relative">
       <button class="absolute top-2 right-2 text-gray-400 hover:text-gray-600" @click="StopModal">
@@ -127,27 +128,27 @@
       </button>
       <div class="h-full overflow-y-auto">
         <div class="flex items-center text-left"> <!-- Added text-left class here -->
-          <img class="mx-auto rounded-full h-64 w-64 flex-shrink-0" v-bind:src="asade.profile_picture">
+          <img class="mx-auto rounded-full h-64 w-64 flex-shrink-0" v-bind:src="blabla.profile_picture">
           <div class="mx-auto px-2 flex-shrink">
-            <span class="text-6xl">{{ asade.first_name }} {{ asade.last_name }}</span>
+            <span class="text-6xl">{{ blabla.first_name }} {{ blabla.last_name }}</span>
             <br><br>
-            <h1 class="text-l">{{ asade.email }}</h1>
-            <h1 class="text-l">{{ asade.phone }}</h1>
+            <h1 class="text-l">{{ blabla.email }}</h1>
+            <h1 class="text-l">{{ blabla.phone }}</h1>
           </div>
         </div>
-        <p class="text-lg mt-4 text-left">gender : {{ asade.gender }}</p>
-        <p class="text-lg mt-4 text-left">job : {{ asade.job }}</p>
-        <p class="text-lg mt-4 text-left">street : {{ asade.street }}</p>
-        <p class="text-lg mt-4 text-left">city: {{ asade.city }}</p>
-        <p class="text-lg mt-4 text-left">state : {{ asade.state }}</p>
-        <p class="text-lg mt-4 text-left">country : {{ asade.country }}</p>
-        <p class="text-lg mt-4 text-left">latitude : {{ asade.latitude }}</p>
-        <p class="text-lg mt-4 text-left">longitude : {{ asade.longitude }}</p>
+        <p class="text-lg mt-4 text-left">gender : {{ blabla.gender }}</p>
+        <p class="text-lg mt-4 text-left">job : {{ blabla.job }}</p>
+        <p class="text-lg mt-4 text-left">street : {{ blabla.street }}</p>
+        <p class="text-lg mt-4 text-left">city: {{ blabla.city }}</p>
+        <p class="text-lg mt-4 text-left">state : {{ blabla.state }}</p>
+        <p class="text-lg mt-4 text-left">country : {{ blabla.country }}</p>
+        <p class="text-lg mt-4 text-left">latitude : {{ blabla.latitude }}</p>
+        <p class="text-lg mt-4 text-left">longitude : {{ blabla.longitude }}</p>
       </div>
     </div>
   </div>
 </div>
-
+</transition>
 
 
 
@@ -170,7 +171,7 @@ export default {
     return{
       article:[],
       showmodal:false,
-      asade:null
+      blabla:null
     }
   },
   mounted(){
@@ -188,7 +189,7 @@ export default {
     },
     methods: {
     ShowModal(user) {
-      this.asade = user;
+      this.blabla = user;
       this.showmodal = true;
     },
     StopModal() {
@@ -196,4 +197,34 @@ export default {
     }
 }
 }
+
 </script>
+
+<style>
+/* Add your modal styles here */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 0.3s, visibility 0.3s;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.modal-fade-enter, .modal-fade-leave-to /* .modal-fade-leave-active in <2.1.8 */ {
+  opacity: 0;
+  visibility: hidden;
+}
+</style>
